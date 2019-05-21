@@ -1,0 +1,22 @@
+Package: endpointR
+Title: Humane endpoint detection for single variables in animal experiments
+Version: 0.0.1
+Year: 2019
+Authors@R: 
+    person(given = "Steven",
+           family = "Talbot",
+           role = c("aut", "cre"),
+           email = "talbot.steven@mh-hannover.de",
+           comment = c(ORCID = "0000-0002-9062-4065"))
+Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
+Description: The packages lets you monitor individual animals for reaching humane endpoint criteria.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/mytalbot/endpointR
+BugReports: https://github.com/mytalbot/endpointR/issues
+Suggests: 
+    knitr,
+    rmarkdown
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
