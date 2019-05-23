@@ -1,5 +1,5 @@
 Package: endpointR
-Title: Humane endpoint detection for single variables in animal experiments
+Title: Humane Endpoint Detector for Single Variables in Animal Experiments
 Version: 0.0.1
 Year: 2019
 Authors@R: 
@@ -9,7 +9,7 @@ Authors@R:
            email = "talbot.steven@mh-hannover.de",
            comment = c(ORCID = "0000-0002-9062-4065"))
 Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
-Description: The packages lets you monitor individual animals for reaching humane endpoint criteria.
+Description: The packages lets you monitor individual animals for reaching humane endpoint criteria using a set of custom criteria.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
