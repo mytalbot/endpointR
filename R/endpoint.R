@@ -1,18 +1,49 @@
-#' endpointR
+#' Endpointer function
 #'
-#' @return vector of a single animal for distinct time points.
+#' The \code{epR} function is a tool for the identification of humane endpoints using single outcome variables
+#' from laboratory animal experiments. Originally, it was developed for using body weight but as values are normalized
+#' other continous variables are suited as well. The algorithm is highly functional in identifying strong deviations from
+#' a windowed normality. The hypothesis behind this is: larger deviations always point to severity.
+#'
+#' @param td testdata data.frame with n unique rows and p subsequent time points (e.g. days)
+#' @param org boolean (TRUE/FALSE) for using original values. If FALSE, data are normalized.
+#' @param wl SD window length (default is 6)
+#' @param SDwdth width of the standard deviation around the moving average (default is 2.5)
+#' @param mad boolean - use mean absolute deviation as quasi-clinical scoring constraint (default FALSE)
+#' @param ltype line type in shown plot
+#' @param dotcolor color of the shown dots (default "black")
+#' @param cex point size
+#' @param cex.axis axis tick size
+#' @param cex.lab label size
+#' @param xlim range of x-axis (if set to NULL (default), plot will adapt automatically to given range - may not be nice!)
+#' @param ylim range of <-axis (if set to NULL (default), plot will adapt automatically to given range - may not be nice!)
+#' @param pch R-specific plot symbol for shown dots (default is 19)
+#' @param blind boolean (TRUE/FALSE) - if set to TRUE, no plot will be shown (default is FALSE)
+#' @param ignupr boolean (TRUE/FALSE) - ignore upper threshold violations (default is FALSE)
+#' @param xlab x-axis label
+#' @param ylab y-axis label
+#' @param main title
+#'
+#' @importFrom stats sd complete.cases
+#' @import graphics
+#'
+#' @return data.frame with enpointeR results (n=number of data points, timepoint=index of marked endpoint,
+#' where=upper or lower boundary)
 #'
 #' @export
 #'
-endpointR        <- function(td = td, org=FALSE, wl = 6, SDfaktor = 2, mad=TRUE, ltype = "b", dotcolor = "black", cex = 1,
-                             cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19,
-                             blind = F, ignupr =F, xlab = "time", ylab = "Moving average (%)", main = NULL, ... ){
+#' @examples
+#' epR(as.numeric(gliodat[1,3:length(gliodat[1,])]), blind=TRUE )
+#'
+epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b", dotcolor = "black", cex = 1,
+                cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE, ignupr = FALSE,
+                xlab = "time", ylab = "Moving average (%)", main = NULL){
 
   # essentials --------------------------------------------------------------
   pointlength    <- length(td)
   xachse         <- seq(1,pointlength)
 
-  if(org==TRUE){
+  if(org == TRUE){
     W            <- td
   }else{
     epdat        <- (td / td[1])*100
@@ -28,8 +59,7 @@ endpointR        <- function(td = td, org=FALSE, wl = 6, SDfaktor = 2, mad=TRUE,
     W[1:wl]<- rep(100,wl)
   }
 
-
-  # Calculate backwards windowed SD and mean --------------------------------
+  # calculate backwards windowed SD and mean --------------------------------
   mysd   <- c()
   mymean <- c()
   for (i in pointlength:wl){
@@ -39,7 +69,7 @@ endpointR        <- function(td = td, org=FALSE, wl = 6, SDfaktor = 2, mad=TRUE,
     mymean[i]<- myMean
   }
   mysd[mysd==0] <- NA # remove 0, otherwise first point gets X-ed
-  mysd       <-  mysd*SDfaktor
+  mysd       <-  mysd*SDwdth
 
   # calculate MAD -----------------------------------------------------------
   if(mad==TRUE){
@@ -85,26 +115,26 @@ endpointR        <- function(td = td, org=FALSE, wl = 6, SDfaktor = 2, mad=TRUE,
   # diagnostics -------------------------------------------------------------
   result <- NULL
   if(ignupr==TRUE){
-    lower            <- which(W< mymean-mysd)
-    lower.time.idx   <- if(length(lower)==0) NA else lower
+    lower            <- which(W < mymean - mysd)
+    lower.time.idx   <- if(length(lower) == 0) NA else lower
 
     result           <- data.frame(n = length(W), timepoint = lower.time.idx)
     result$where     <- rep("lower", length(lower.time.idx))
   }else{
-    lower            <- which(W< mymean-mysd)
-    lower.time.idx   <- if(length(lower)==0) NA else lower
+    lower            <- which(W < mymean - mysd)
+    lower.time.idx   <- if(length(lower) == 0) NA else lower
 
     result           <- data.frame(n = length(W), timepoint = lower.time.idx)
     result           <- result[order(result$timepoint, decreasing = F),]
 
-    upr              <- which(W> mymean+mysd)
-    upr.time.idx     <- if(length(upr)==0) NA else upr
+    upr              <- which(W > mymean + mysd)
+    upr.time.idx     <- if(length(upr) == 0) NA else upr
 
     result           <- rbind(result, data.frame(n = length(W), timepoint = upr.time.idx))
-    result$where     <- append(rep("lower", length(lower.time.idx)), rep("upper", length(upr.time.idx))  )
+    result$where     <- append(rep("lower", length(lower.time.idx)), rep("upper", length(upr.time.idx)) )
   }
 
-  if(all(is.na(result$timepoint))==TRUE){
+  if(all(is.na(result$timepoint)) == TRUE){
     result           <- data.frame(n = length(W), timepoint = NA, where = NA)
   }else{
     result           <- result[complete.cases(result), ]
