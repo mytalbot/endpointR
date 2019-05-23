@@ -12,6 +12,8 @@
 #' @param mad boolean - use mean absolute deviation as quasi-clinical scoring constraint (default FALSE)
 #' @param ltype line type in shown plot
 #' @param dotcolor color of the shown dots (default "black")
+#' @param uprcol color of the upper threshold violation indicators
+#' @param lwrcol color of the upper threshold violation indicators
 #' @param cex point size
 #' @param cex.axis axis tick size
 #' @param cex.lab label size
@@ -35,9 +37,9 @@
 #' @examples
 #' epR(as.numeric(gliodat[1,3:length(gliodat[1,])]), blind=TRUE )
 #'
-epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b", dotcolor = "black", cex = 1,
-                cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE, ignupr = FALSE,
-                xlab = "time", ylab = "Moving average (%)", main = NULL){
+epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b", dotcolor = "black", uprcol = "darkgreen",
+                lwrcol = "magenta", cex = 1, cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE,
+                ignupr = FALSE, xlab = "time", ylab = "Moving average (%)", main = NULL){
 
   # essentials --------------------------------------------------------------
   pointlength    <- length(td)
@@ -101,14 +103,14 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b",
          ylab     = ylab,
          main     = main)
 
-    lines(xachse, mymean+mysd, col="blue", lty=2, cex=.5, lwd=2.5)
-    lines(xachse, mymean-mysd, col="blue", lty=2, cex=.5, lwd=2.5)
+    lines(xachse, mymean + mysd, col="blue", lty = 2, cex = .5, lwd = 2.5)
+    lines(xachse, mymean - mysd, col="blue", lty = 2, cex = .5, lwd = 2.5)
 
-    abline(h=100, col="black",  lwd=2, lty=3)
-    abline(v=wl , col="gray40", lwd=1, lty=3)
+    abline(h = 100, col = "black",  lwd = 2, lty = 3)
+    abline(v = wl , col = "gray40", lwd = 1, lty = 3)
 
-    points(which(W< mymean-mysd), W[which(W< mymean-mysd)], col="magenta",   pch=4, cex=3, lwd=3)
-    points(which(W> mymean+mysd), W[which(W> mymean+mysd)], col="darkgreen", pch=4, cex=3, lwd=3)
+    points(which(W< mymean-mysd), W[which(W< mymean-mysd)], col = lwrcol, pch = 4, cex = 3, lwd = 3)
+    points(which(W> mymean+mysd), W[which(W> mymean+mysd)], col = uprcol, pch = 4, cex = 3, lwd = 3)
 
   }else{}
 

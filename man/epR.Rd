@@ -5,8 +5,9 @@
 \title{Endpointer function}
 \usage{
 epR(td = td, org = FALSE, wl = 6, SDwdth = 2.5, mad = TRUE,
-  ltype = "b", dotcolor = "black", cex = 1, cex.axis = 1,
-  cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE,
+  ltype = "b", dotcolor = "black", uprcol = "darkgreen",
+  lwrcol = "magenta", cex = 1, cex.axis = 1, cex.lab = 1,
+  xlim = NULL, ylim = NULL, pch = 19, blind = FALSE,
   ignupr = FALSE, xlab = "time", ylab = "Moving average (\%)",
   main = NULL)
 }
@@ -24,6 +25,10 @@ epR(td = td, org = FALSE, wl = 6, SDwdth = 2.5, mad = TRUE,
 \item{ltype}{line type in shown plot}
 
 \item{dotcolor}{color of the shown dots (default "black")}
+
+\item{uprcol}{color of the upper threshold violation indicators}
+
+\item{lwrcol}{color of the upper threshold violation indicators}
 
 \item{cex}{point size}
 
