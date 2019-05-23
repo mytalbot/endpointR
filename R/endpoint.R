@@ -126,13 +126,13 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b",
     lower            <- which(W < mymean - mysd)
     lower.time.idx   <- if(length(lower) == 0) NA else lower
 
-    result           <- data.frame(n = length(W), timepoint = lower.time.idx)
+    result           <- data.frame(n = length(W), timepoint = lower.time.idx, value = round(W[lower.time.idx],2))
     result           <- result[order(result$timepoint, decreasing = F),]
 
     upr              <- which(W > mymean + mysd)
     upr.time.idx     <- if(length(upr) == 0) NA else upr
 
-    result           <- rbind(result, data.frame(n = length(W), timepoint = upr.time.idx))
+    result           <- rbind(result, data.frame(n = length(W), timepoint = upr.time.idx, value = if(all(is.na(W[upr.time.idx])) == TRUE) NA else round(W[upr.time.idx],2) ))
     result$where     <- append(rep("lower", length(lower.time.idx)), rep("upper", length(upr.time.idx)) )
   }
 
@@ -144,3 +144,6 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b",
 
   return(result)
 }
+
+
+
