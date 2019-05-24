@@ -27,7 +27,7 @@ ep_select      <- function(testdata, n = 1){
     n          <- which(testdata[,1] == n)
   }
 
-  print( data.frame(testdata[n, c(1,2) ], datapoints = length(orgw)) )
+  # print( data.frame(testdata[n, c(1,2) ], datapoints = length(orgw)) )
 
   return(orgw)
 }

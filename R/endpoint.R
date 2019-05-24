@@ -37,7 +37,7 @@
 #' @examples
 #' epR(as.numeric(gliodat[1,3:length(gliodat[1,])]), blind=TRUE )
 #'
-epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b", dotcolor = "black", uprcol = "darkgreen",
+epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2, mad=FALSE, ltype = "b", dotcolor = "black", uprcol = "darkgreen",
                 lwrcol = "magenta", cex = 1, cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE,
                 ignupr = FALSE, xlab = "time", ylab = "Moving average (%)", main = NULL){
 
@@ -126,13 +126,20 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2.5, mad=TRUE, ltype = "b",
     lower            <- which(W < mymean - mysd)
     lower.time.idx   <- if(length(lower) == 0) NA else lower
 
-    result           <- data.frame(n = length(W), timepoint = lower.time.idx, value = round(W[lower.time.idx],2))
-    result           <- result[order(result$timepoint, decreasing = F),]
+    # capture errors if there are no lower threshold violations
+    if(all(is.na(lower.time.idx)) != TRUE){
+      result         <- data.frame(n = length(W), timepoint = lower.time.idx, value = round(W[lower.time.idx],2))
+      result         <- result[order(result$timepoint, decreasing = F),]
+    }else{
+      result         <- data.frame(n = length(W), timepoint = NA, value =NA)
+      result         <- result[order(result$timepoint, decreasing = F),]
+    }
 
     upr              <- which(W > mymean + mysd)
     upr.time.idx     <- if(length(upr) == 0) NA else upr
 
-    result           <- rbind(result, data.frame(n = length(W), timepoint = upr.time.idx, value = if(all(is.na(W[upr.time.idx])) == TRUE) NA else round(W[upr.time.idx],2) ))
+    result           <- rbind(result, data.frame(n = length(W), timepoint = upr.time.idx,
+                                                 value = if(all(is.na(W[upr.time.idx])) == TRUE) NA else round(W[upr.time.idx],2) ))
     result$where     <- append(rep("lower", length(lower.time.idx)), rep("upper", length(upr.time.idx)) )
   }
 

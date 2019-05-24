@@ -19,7 +19,7 @@ ep_load      <- function(file ){
 
   animals    <- length(unique(testdata[,1]))
 
-  print(paste("Success! Data loaded with n = ", animals, sep=""))
+  # print(paste("Success! Data loaded with n = ", animals, sep=""))
 
   return(testdata)
 }
