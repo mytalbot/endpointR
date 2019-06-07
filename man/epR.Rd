@@ -4,7 +4,7 @@
 \alias{epR}
 \title{Endpointer function}
 \usage{
-epR(td = td, org = FALSE, wl = 6, SDwdth = 2.5, mad = TRUE,
+epR(td = td, org = FALSE, wl = 6, SDwdth = 2, mad = FALSE,
   ltype = "b", dotcolor = "black", uprcol = "darkgreen",
   lwrcol = "magenta", cex = 1, cex.axis = 1, cex.lab = 1,
   xlim = NULL, ylim = NULL, pch = 19, blind = FALSE,
