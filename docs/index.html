@@ -100,17 +100,18 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is a basic example uses the internal Glioma data from Helgers &amp; Talbot et al 2019 to indicate potential endpoints for individual animals. The input variables are raw body weight data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(endpointR)
-td        &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(gliodat[<span class="dv">1</span>,])
-danger    &lt;-<span class="st"> </span><span class="kw"><a href="reference/epR.html">epR</a></span>(<span class="dt">td        =</span> td,
-                 <span class="dt">org       =</span> <span class="ot">FALSE</span>,
-                 <span class="dt">wl        =</span> <span class="dv">6</span>,
-                 <span class="dt">SDwdth    =</span> <span class="dv">2</span>,
-                 <span class="dt">mad       =</span> <span class="ot">FALSE</span>,
-                 <span class="dt">blind     =</span> <span class="ot">TRUE</span>)
+a      &lt;-<span class="st"> </span><span class="dv">1</span>
+td     &lt;-<span class="st"> </span><span class="kw"><a href="reference/ep_select.html">ep_select</a></span>(gliodat, a) 
+danger &lt;-<span class="st"> </span><span class="kw"><a href="reference/epR.html">epR</a></span>(<span class="dt">td        =</span> td,
+              <span class="dt">org       =</span> <span class="ot">FALSE</span>,
+              <span class="dt">wl        =</span> <span class="dv">6</span>,
+              <span class="dt">SDwdth    =</span> <span class="dv">2</span>,
+              <span class="dt">mad       =</span> <span class="ot">FALSE</span>,
+              <span class="dt">blind     =</span> <span class="ot">TRUE</span>)
 danger
 <span class="co">#&gt;    n timepoint value where</span>
-<span class="co">#&gt; 1 31        14 99.25 lower</span>
-<span class="co">#&gt; 2 31        17 94.14 lower</span></code></pre></div>
+<span class="co">#&gt; 1 15        12 99.25 lower</span>
+<span class="co">#&gt; 2 15        15 94.14 lower</span></code></pre></div>
 </div>
 </div>
   </div>

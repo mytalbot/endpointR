@@ -28,15 +28,16 @@ This is a basic example uses the internal Glioma data from Helgers & Talbot et a
 
 ``` r
 library(endpointR)
-td        <- as.numeric(gliodat[1,])
-danger    <- epR(td        = td,
-                 org       = FALSE,
-                 wl        = 6,
-                 SDwdth    = 2,
-                 mad       = FALSE,
-                 blind     = TRUE)
+a      <- 1
+td     <- ep_select(gliodat, a) 
+danger <- epR(td        = td,
+              org       = FALSE,
+              wl        = 6,
+              SDwdth    = 2,
+              mad       = FALSE,
+              blind     = TRUE)
 danger
 #>    n timepoint value where
-#> 1 31        14 99.25 lower
-#> 2 31        17 94.14 lower
+#> 1 15        12 99.25 lower
+#> 2 15        15 94.14 lower
 ```
