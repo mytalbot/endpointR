@@ -1,0 +1,11 @@
+citHeader("To cite endpointR in publications use:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "endpointR: Humane Endpoint Detection for Longitudinal Data in Laboratory Animals",
+  author   = "Steven R. Talbot",
+  year     = "2019",
+  url      = "https://talbotsr.com/endpointR/index.html",
+  textVersion = "Steven R Talbot. endpointR: Humane Endpoint Detection for Longitudinal Data in Laboratory Animals. 2019."
+)
+

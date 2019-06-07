@@ -1,5 +1,5 @@
 Package: endpointR
-Title: Humane Endpoint Detector for Single Variables in Animal Experiments
+Title: Humane Endpoint Detection for Longitudinal Data in Laboratory Animals
 Version: 0.0.1.9000
 Year: 2019
 Authors@R: 
