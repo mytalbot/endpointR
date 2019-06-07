@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-endpointR <img src='man/figures/logo.png' align="right" height="139" />
-=======================================================================
+endpointR <img src="https://talbotsr.com/endpointR/logo.png" align="right" height="139" />
+==========================================================================================
 
 endpointR
 =========
 
 <!-- badges: start -->
 <!-- badges: end -->
-The goal of endpointR is to ...
+The endpointR is a computational tool for aiding scientists in laboratory animal research to identify humane endpoints. Originally it was developed for using body weight (change) data but it can be used with any time series data. However, it is not meant as substitution for experience and reason - but it may help in any decision making process concerning the wellbeing of an animal.
 
 Installation
 ------------
@@ -20,6 +20,15 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("mytalbot/endpointR")
 library(endpointR)
 ```
+
+endpointR Shiny App
+-------------------
+
+The endpointR is ready-to-use as a Shiny app for body weight data analysis under the following link.
+
+[endpointR](https://calliope.shinyapps.io/endpointer/)
+
+Please restrict your online time on the app and close the browser when finished as we're only using a public license. Thank you!
 
 Example
 -------

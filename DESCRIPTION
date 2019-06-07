@@ -1,6 +1,6 @@
 Package: endpointR
 Title: Humane Endpoint Detector for Single Variables in Animal Experiments
-Version: 0.0.1
+Version: 0.0.1.9000
 Year: 2019
 Authors@R: 
     person(given = "Steven",
