@@ -9,7 +9,7 @@ endpointR
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/mytalbot/endpointR.svg?branch=master)](https://travis-ci.org/r-lib/usethis) <!-- badges: end -->
 
-The endpointR is a computational tool for aiding scientists in laboratory animal research to identify humane endpoints. Originally it was developed for using body weight (change) data but it can be used with any time series data. However, it is not meant as substitution for experience and reason - but it may help in any decision making process concerning the wellbeing of an animal.
+The endpointR is a computational tool for aiding scientists in laboratory animal research to identify humane endpoints. Originally it was developed for body weight (change) data but it can be used with any (longitudinal/time series) data. However, it is not meant as substitution for experience and reason - but it may help in any decision making process concerning the wellbeing of an animal.
 
 Installation
 ------------
@@ -34,7 +34,7 @@ Please restrict your online time on the app and close the browser when finished 
 Example
 -------
 
-This is a basic example uses the internal Glioma data from Helgers & Talbot et al 2019 to indicate potential endpoints for individual animals. The input variables are raw body weight data.
+This is a basic example uses the internal Glioma data from Helgers & Talbot et al 2019 (under review) to indicate potential endpoints for individual animals. The input variables are raw body weight data.
 
 ``` r
 library(endpointR)
