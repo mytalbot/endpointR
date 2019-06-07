@@ -7,7 +7,8 @@ endpointR
 =========
 
 <!-- badges: start -->
-<!-- badges: end -->
+[![Travis build status](https://travis-ci.org/mytalbot/endpointR.svg?branch=master)](https://travis-ci.org/r-lib/usethis) <!-- badges: end -->
+
 The endpointR is a computational tool for aiding scientists in laboratory animal research to identify humane endpoints. Originally it was developed for using body weight (change) data but it can be used with any time series data. However, it is not meant as substitution for experience and reason - but it may help in any decision making process concerning the wellbeing of an animal.
 
 Installation
