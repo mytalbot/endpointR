@@ -22,15 +22,65 @@ With the presented algorithm a help in the decision making process was offered, 
 Therefore, we present the endpointR algorithm in this package, so that it can be used with body weight data in other models or even with other variables for potential humane endpoint determination.
 
 ## What can it do - what is it for?
+The endpointR needs longitudinal data, e.g. a time series of body weight data. However, for the actual calculation the time information is irrelevant. Data should simply be ordered as a variable vector (c(100, 98, 97, 95, 90, 85, 81)). If no normalized data are provided, the endpointR can take care of this.
 
+There should be no missing data in the provided vector. Also, the endpointR is based on the calculation of a moving average. It requires the definition of a window size for calculating the floating mean and standard deviation. This also means that data must have a certain length to provide meainingful insights. As a crude recommendation, data should be at least 2 to 3 times longer than the window size. For example, if a series of body weight data is 18 days long, the maximum window length should be 6.
 
+### Disclaimer
+As already mentioned, the endpointR was originally developed for body weight change analysis but it may also be useful for other variables However, it remains a secondary assessment tool. It is not meant to replace experience and reason. Scientists should therefore use it carefully in any decision making process. We do not accept any liabilities from using the endpointR.
 
 ## Functions
 
-## working example
+### ep_load
+```
+# endpointR load function allows easy loading of data.
+ep_load(file)
+```
+For context, data should be prepared as a *.txt file in the following format. The table is organized in rows. Each separate animal is in a row and consecutive time points are listed column-wise. The first time entry (the time dimension does not matter as long as it remains equal in all observations, e.g. hours, days, weeks etc) is always the baseline body weight on which all other data will be normalized (indicated as time 0 below). After id, each animal should have some treatment information in case further context is needed. If more meta-information is required, a sample information file can always be prepared which should have the same index structure as the main data file. However, this is not used in the endpointR. `file` can contain the path and file name information that points to the data file, e.g. "file=C:/project/data/mydata.txt".
+
+|id      | treatment     | time 0 | time 1 | ...  | time n  |
+|:-------|:--------------|:-------|:-------|:-----|:--------|
+|animal1 |Microinjection |328     |324     |...   |308      |
+|animal2 |Microinjection |397     |391     |...   |378      |
+|animal3 |Control        |415     |412     |...   |410      |
+|...     |...            |...     |...     |...   |...      |
+  
+
+### ep_select
+```
+# endpointR load function allows easy loading of data.
+ep_select(testdata, n = 1)
+```
+The `ep_select` function can be used for data subsetting by animal index (n = 1 indicates the first animal in the loaded data). As input the output from `ep_load` can be used. The output from `ep_select` may then serve as input for the `td` field in the `epR` function.
 
 
+### epR
+```
+# Main endpointR function.
+epR(td = td, org = FALSE, wl = 6, SDwdth = 2, mad = FALSE, ltype = "b", dotcolor = "black", uprcol = "darkgreen", lwrcol = "magenta", cex = 1, cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE, ignupr = FALSE, xlab = "time", ylab = "Moving average (%)", main = NULL)
+```
+The `epR` function is the main endpointR body. It will calculate all relevant information for a humane endpoint assessment for the input data. `td` (test data) contains the variable vector of the test animal, `org` will determine whether to use original or floating mean data. The axes might need a range adaption if `org=TRUE`. `wl` determines the window length for the calculations and `SDwidth` the corridor width of the standard deviation around the moving average. `mad` controls whether to use mean absolute deviation constraint or not. The endpointR is also meant as an optical inspection tool. The flow of body weight can be monitored graphically. However, sometimes this is not useful, e.g. if multiple calculations are needed. With the `blind` object plots are not shown. With `ignupr` the upper corridor deviations can be ignored, e.g. if the researcher is only interested in decreasing variables after insult. The rest are the usual graphics parameters.
+
+
+## Working example
+This example uses the internal `gliodat` data set. 
 
 ```{r setup}
 library(endpointR)
+
+td        <- as.numeric(gliodat[1,])
+
+danger    <- epR(td        = td,
+                 org       = FALSE,
+                 wl        = 6,
+                 SDwdth    = 2,
+                 mad       = FALSE,
+                 cex       = 1.4,
+                 cex.lab   = 1.2,
+                 blind     = FALSE,
+                 ignupr    = FALSE,
+                 ylim      = c(90,105), 
+                 xlim      = c(0,28),
+                 xlab      = "day")
+danger
 ```

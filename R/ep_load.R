@@ -13,9 +13,9 @@
 #'
 #' @export
 #'
-ep_load      <- function(file ){
+ep_load      <- function(file){
 
-  testdata   <- data.frame(read.table(file, header =TRUE, sep ="\t") )
+  testdata   <- data.frame(read.table(file, header = TRUE, sep = "\t") )
 
   animals    <- length(unique(testdata[,1]))
 

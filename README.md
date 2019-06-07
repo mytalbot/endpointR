@@ -18,6 +18,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("mytalbot/endpointR")
+library(endpointR)
 ```
 
 Example
@@ -29,10 +30,10 @@ This is a basic example uses the internal Glioma data from Helgers & Talbot et a
 library(endpointR)
 td        <- as.numeric(gliodat[1,])
 danger    <- epR(td        = td,
-                 org       = F,
+                 org       = FALSE,
                  wl        = 6,
                  SDwdth    = 2,
-                 mad       = F,
+                 mad       = FALSE,
                  blind     = TRUE)
 danger
 #>    n timepoint value where

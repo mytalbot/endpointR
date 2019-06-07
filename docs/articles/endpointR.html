@@ -89,15 +89,108 @@
 <div id="what-can-it-do---what-is-it-for" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-can-it-do---what-is-it-for" class="anchor"></a>What can it do - what is it for?</h2>
+<p>The endpointR needs longitudinal data, e.g. a time series of body weight data. However, for the actual calculation the time information is irrelevant. Data should simply be ordered as a variable vector (c(100, 98, 97, 95, 90, 85, 81)). If no normalized data are provided, the endpointR can take care of this.</p>
+<p>There should be no missing data in the provided vector. Also, the endpointR is based on the calculation of a moving average. It requires the definition of a window size for calculating the floating mean and standard deviation. This also means that data must have a certain length to provide meainingful insights. As a crude recommendation, data should be at least 2 to 3 times longer than the window size. For example, if a series of body weight data is 18 days long, the maximum window length should be 6.</p>
+<div id="disclaimer" class="section level3">
+<h3 class="hasAnchor">
+<a href="#disclaimer" class="anchor"></a>Disclaimer</h3>
+<p>As already mentioned, the endpointR was originally developed for body weight change analysis but it may also be useful for other variables However, it remains a secondary assessment tool. It is not meant to replace experience and reason. Scientists should therefore use it carefully in any decision making process. We do not accept any liabilities from using the endpointR.</p>
+</div>
 </div>
 <div id="functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#functions" class="anchor"></a>Functions</h2>
+<div id="ep_load" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ep_load" class="anchor"></a>ep_load</h3>
+<pre><code><a href="../reference/ep_load.html"># endpointR load function allows easy loading of data.
+ep_load(file)</a></code></pre>
+<p>For context, data should be prepared as a *.txt file in the following format. The table is organized in rows. Each separate animal is in a row and consecutive time points are listed column-wise. The first time entry (the time dimension does not matter as long as it remains equal in all observations, e.g. hours, days, weeks etc) is always the baseline body weight on which all other data will be normalized (indicated as time 0 below). After id, each animal should have some treatment information in case further context is needed. If more meta-information is required, a sample information file can always be prepared which should have the same index structure as the main data file. However, this is not used in the endpointR. <code>file</code> can contain the path and file name information that points to the data file, e.g. “file=C:/project/data/mydata.txt”.</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">id</th>
+<th align="left">treatment</th>
+<th align="left">time 0</th>
+<th align="left">time 1</th>
+<th align="left">…</th>
+<th align="left">time n</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">animal1</td>
+<td align="left">Microinjection</td>
+<td align="left">328</td>
+<td align="left">324</td>
+<td align="left">…</td>
+<td align="left">308</td>
+</tr>
+<tr class="even">
+<td align="left">animal2</td>
+<td align="left">Microinjection</td>
+<td align="left">397</td>
+<td align="left">391</td>
+<td align="left">…</td>
+<td align="left">378</td>
+</tr>
+<tr class="odd">
+<td align="left">animal3</td>
+<td align="left">Control</td>
+<td align="left">415</td>
+<td align="left">412</td>
+<td align="left">…</td>
+<td align="left">410</td>
+</tr>
+<tr class="even">
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ep_select" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ep_select" class="anchor"></a>ep_select</h3>
+<pre><code><a href="../reference/ep_select.html"># endpointR load function allows easy loading of data.
+ep_select(testdata, n = 1)</a></code></pre>
+<p>The <code>ep_select</code> function can be used for data subsetting by animal index (n = 1 indicates the first animal in the loaded data). As input the output from <code>ep_load</code> can be used. The output from <code>ep_select</code> may then serve as input for the <code>td</code> field in the <code>epR</code> function.</p>
+</div>
+<div id="epr" class="section level3">
+<h3 class="hasAnchor">
+<a href="#epr" class="anchor"></a>epR</h3>
+<pre><code><a href="../reference/epR.html"># Main endpointR function.
+epR(td = td, org = FALSE, wl = 6, SDwdth = 2, mad = FALSE, ltype = "b", dotcolor = "black", uprcol = "darkgreen", lwrcol = "magenta", cex = 1, cex.axis = 1, cex.lab = 1, xlim = NULL, ylim = NULL, pch = 19, blind = FALSE, ignupr = FALSE, xlab = "time", ylab = "Moving average (%)", main = NULL)</a></code></pre>
+<p>The <code>epR</code> function is the main endpointR body. It will calculate all relevant information for a humane endpoint assessment for the input data. <code>td</code> (test data) contains the variable vector of the test animal, <code>org</code> will determine whether to use original or floating mean data. The axes might need a range adaption if <code>org=TRUE</code>. <code>wl</code> determines the window length for the calculations and <code>SDwidth</code> the corridor width of the standard deviation around the moving average. <code>mad</code> controls whether to use mean absolute deviation constraint or not. The endpointR is also meant as an optical inspection tool. The flow of body weight can be monitored graphically. However, sometimes this is not useful, e.g. if multiple calculations are needed. With the <code>blind</code> object plots are not shown. With <code>ignupr</code> the upper corridor deviations can be ignored, e.g. if the researcher is only interested in decreasing variables after insult. The rest are the usual graphics parameters.</p>
+</div>
 </div>
 <div id="working-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#working-example" class="anchor"></a>working example</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(endpointR)</code></pre></div>
+<a href="#working-example" class="anchor"></a>Working example</h2>
+<p>This example uses the internal <code>gliodat</code> data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(endpointR)
+
+td        &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(gliodat[<span class="dv">1</span>,])
+
+danger    &lt;-<span class="st"> </span><span class="kw"><a href="../reference/epR.html">epR</a></span>(<span class="dt">td        =</span> td,
+                 <span class="dt">org       =</span> F,
+                 <span class="dt">wl        =</span> <span class="dv">6</span>,
+                 <span class="dt">SDwdth    =</span> <span class="dv">2</span>,
+                 <span class="dt">mad       =</span> F,
+                 <span class="dt">cex       =</span> <span class="fl">1.4</span>,
+                 <span class="dt">cex.lab   =</span> <span class="fl">1.2</span>,
+                 <span class="dt">blind     =</span> F,
+                 <span class="dt">ignupr    =</span> <span class="ot">FALSE</span>,
+                 <span class="dt">ylim      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">90</span>,<span class="dv">105</span>), 
+                 <span class="dt">xlim      =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>,<span class="dv">28</span>),
+                 <span class="dt">xlab      =</span> <span class="st">"day"</span>)</code></pre></div>
+<p><img src="endpointR_files/figure-html/setup-1.png" width="700"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">danger
+<span class="co">#&gt;    n timepoint value where</span>
+<span class="co">#&gt; 1 31        14 99.25 lower</span>
+<span class="co">#&gt; 2 31        17 94.14 lower</span></code></pre></div>
 </div>
   </div>
 
@@ -109,7 +202,7 @@
 <li><a href="#about-endpointr">About endpointR</a></li>
       <li><a href="#what-can-it-do---what-is-it-for">What can it do - what is it for?</a></li>
       <li><a href="#functions">Functions</a></li>
-      <li><a href="#working-example">working example</a></li>
+      <li><a href="#working-example">Working example</a></li>
       </ul>
 </div>
       </div>
