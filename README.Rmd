@@ -31,9 +31,16 @@ devtools::install_github("mytalbot/endpointR")
 ```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example uses the internal Glioma data from Helgers & Talbot et al 2019 to indicate potential endpoints for individual animals. The input variables are raw body weight data.
 
 ```{r example}
 library(endpointR)
-## basic example code
+td        <- as.numeric(gliodat[1,])
+danger    <- epR(td        = td,
+                 org       = F,
+                 wl        = 6,
+                 SDwdth    = 2,
+                 mad       = F,
+                 blind     = TRUE)
+danger
 ```

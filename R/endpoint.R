@@ -109,8 +109,7 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2, mad=FALSE, ltype = "b", 
     abline(h = 100, col = "black",  lwd = 2, lty = 3)
     abline(v = wl , col = "gray40", lwd = 1, lty = 3)
 
-    points(which(W< mymean-mysd), W[which(W< mymean-mysd)], col = lwrcol, pch = 4, cex = 3, lwd = 3)
-    points(which(W> mymean+mysd), W[which(W> mymean+mysd)], col = uprcol, pch = 4, cex = 3, lwd = 3)
+
 
   }else{}
 
@@ -122,6 +121,11 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2, mad=FALSE, ltype = "b", 
 
     result           <- data.frame(n = length(W), timepoint = lower.time.idx)
     result$where     <- rep("lower", length(lower.time.idx))
+
+    if(blind==FALSE){
+      points(which(W< mymean-mysd), W[which(W< mymean-mysd)], col = lwrcol, pch = 4, cex = 3, lwd = 3)
+    }else{}
+
   }else{
     lower            <- which(W < mymean - mysd)
     lower.time.idx   <- if(length(lower) == 0) NA else lower
@@ -141,6 +145,12 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2, mad=FALSE, ltype = "b", 
     result           <- rbind(result, data.frame(n = length(W), timepoint = upr.time.idx,
                                                  value = if(all(is.na(W[upr.time.idx])) == TRUE) NA else round(W[upr.time.idx],2) ))
     result$where     <- append(rep("lower", length(lower.time.idx)), rep("upper", length(upr.time.idx)) )
+
+    if(blind==FALSE){
+      points(which(W< mymean-mysd), W[which(W< mymean-mysd)], col = lwrcol, pch = 4, cex = 3, lwd = 3)
+      points(which(W> mymean+mysd), W[which(W> mymean+mysd)], col = uprcol, pch = 4, cex = 3, lwd = 3)
+    }else{}
+
   }
 
   if(all(is.na(result$timepoint)) == TRUE){

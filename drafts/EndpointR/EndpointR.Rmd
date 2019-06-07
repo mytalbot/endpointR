@@ -1,0 +1,63 @@
+---
+title: The endpointR
+author:
+  - name: Steven R. Talbot
+    email: talbot.steven@mh-hannover.de
+    affiliation: Laboratory Animal Science, Hannover Medical School (Hannover, Germany)
+abstract: |
+  This is the abstract.
+
+  It consists of two paragraphs.
+bibliography: sigproc.bib
+csl: acm-sig-proceedings.csl
+output: rticles::acm_article
+---
+
+# Introduction 
+In the 1980s John Bollinger published a book on technical chart analysis of stock prices. He proposed a system of engulfing standard deviation thresholds (later called Bollinger bands) around price candles in which deviations from a simple moving average (SMA) indicate potential over- or underrated stocks, e.g. when a price candle pierces the upper threshold a long position (buy) is favored. However, following the random walk character of price development, a systematic evaluation of optimal function parameters was not yet reliably achieved, e.g. for giving definitive buy/sell recommendations. If they were found, everybody would use them, rendering them chaotic again almost immediately. Therefore, Bollinger Bands can be seen as quasi-predictive in nature but remain a highly intuitive tool for technical chart analysis.
+
+However, this must not necessarily mean that the same technique cannot be used sucessfully in more systematic models where deviations are not defined by noise but by cause. As such, we recently reported on an effective algorithm capable of predicting humane endpoints in rats undergoing Glioblastoma injections. Using body weight only, the algorithm successfully identified endpoints in a large set of animals from various subgroups and was further validated using different data sets. The only caveat was the number of false alarms - but this follows the tradition of the Bollinger Bands as high volatility kills their effectivtiy as well.
+
+## Functionality
+
+
+ 
+
+
+# Evaluation
+
+
+# Conclusion
+
+# References
+
+---
+references:
+- id: meier2012
+  title: Professinal Android 4 Application Development
+  author: 
+  - family: Meier
+    given: Reto
+  type: book
+  publisher: John Wiley & Sons, Inc.
+  issued:
+    year: 2012
+    month: 5
+- id: fenner2012a
+  title: One-click science marketing
+  author:
+  - family: Fenner
+    given: Martin
+  container-title: Nature Materials
+  volume: 11
+  URL: 'https://doi.org/10.1038/nmat3283'
+  DOI: 10.1038/nmat3283
+  issue: 4
+  publisher: Nature Publishing Group
+  page: 261-263
+  type: article-journal
+  issued:
+    year: 2012
+    month: 3
+...
+

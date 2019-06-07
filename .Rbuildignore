@@ -1,3 +1,7 @@
 ^endpointR\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
+^drafts$
+^scripts$
+^docs$
+^test$
