@@ -34,7 +34,7 @@ Please restrict your online time on the app and close the browser when finished 
 Example
 -------
 
-This is a basic example uses the internal Glioma data from Helgers & Talbot et al 2019 (under review) to indicate potential endpoints for individual animals. The input variables are raw body weight data.
+This is a basic example using the internal Glioma data from Helgers & Talbot et al 2019 (under review) to indicate potential endpoints for individual animals. The input variables are raw body weight data.
 
 ``` r
 library(endpointR)

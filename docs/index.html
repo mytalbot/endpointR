@@ -86,7 +86,7 @@
 <a href="#endpointr-1" class="anchor"></a>endpointR</h1>
 <!-- badges: start -->
 
-<p>The endpointR is a computational tool for aiding scientists in laboratory animal research to identify humane endpoints. Originally it was developed for using body weight (change) data but it can be used with any time series data. However, it is not meant as substitution for experience and reason - but it may help in any decision making process concerning the wellbeing of an animal.</p>
+<p>The endpointR is a computational tool for aiding scientists in laboratory animal research to identify humane endpoints. Originally it was developed for body weight (change) data but it can be used with any (longitudinal/time series) data. However, it is not meant as substitution for experience and reason - but it may help in any decision making process concerning the wellbeing of an animal.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -105,7 +105,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example uses the internal Glioma data from Helgers &amp; Talbot et al 2019 to indicate potential endpoints for individual animals. The input variables are raw body weight data.</p>
+<p>This is a basic example using the internal Glioma data from Helgers &amp; Talbot et al 2019 (under review) to indicate potential endpoints for individual animals. The input variables are raw body weight data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(endpointR)
 a      &lt;-<span class="st"> </span><span class="dv">1</span>
 td     &lt;-<span class="st"> </span><span class="kw"><a href="reference/ep_select.html">ep_select</a></span>(gliodat, a) 
