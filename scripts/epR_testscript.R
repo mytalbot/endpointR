@@ -21,6 +21,8 @@ result    <- epR(td        = td,
                  xlab      = "day")
 result
 
+# CRAN Tutorial
+# https://www.youtube.com/watch?v=-zID-rVDEHQ
 
 
 

@@ -9,7 +9,7 @@ Authors@R:
            email = "talbot.steven@mh-hannover.de",
            comment = c(ORCID = "0000-0002-9062-4065"))
 Maintainer: Steven R. Talbot <talbot.steven@mh-hannover.de>
-Description: The packages allows the monitoring of individual animals for reaching a humane endpoint in a set of longitudinal data.
+Description: This packages allows the monitoring of individual animals for reaching a humane endpoint in a set of longitudinal data.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
