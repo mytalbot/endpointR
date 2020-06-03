@@ -1,11 +1,13 @@
 citHeader("To cite endpointR in publications use:")
 
 citEntry(
-  entry    = "Misc",
-  title    = "endpointR: Humane Endpoint Detection for Longitudinal Data in Laboratory Animals",
-  author   = "Steven R. Talbot",
-  year     = "2019",
-  url      = "https://talbotsr.com/endpointR/index.html",
-  textVersion = "Steven R Talbot. endpointR: Humane Endpoint Detection for Longitudinal Data in Laboratory Animals. 2019."
+  entry    = "Article",
+  journal  = "Scientific Reports",
+  title    = "Body weight algorithm predicts humane endpoint in an intracranial rat glioma model",
+  author   = c("Simeon O. A. Helgers", "Steven R. Talbot", "Ann-Kristin Riedesel", "Laura Wassermann", "Zhiqun Wu", "Joachim K. Krauss"," Christine Häger", "André Bleich", "Kerstin Schwabe"),
+  year     = "2020",
+   volume = "10",
+  url      = "https://www.nature.com/articles/s41598-020-65783-7",
+  textVersion = "Helgers, S.O.A., Talbot, S.R., Riedesel, A. et al. Body weight algorithm predicts humane endpoint in an intracranial rat glioma model. Sci Rep 10, 9020 (2020). https://doi.org/10.1038/s41598-020-65783-7."
 )
 

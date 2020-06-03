@@ -78,6 +78,7 @@ epR <- function(td = td, org=FALSE, wl = 6, SDwdth = 2, mad=FALSE, ltype = "b", 
   myMAD <- c()
   for (i in wl:pointlength ){
     myMAD[i] <- mean(W[(i-1):((i-1)-(wl-1))]) - W[i]
+    #myMAD[i] <- mean(W[(i):((i)-(wl-1))]) - W[i]
   }
   myMAD      <- round(myMAD,2)
 

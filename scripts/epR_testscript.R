@@ -4,14 +4,14 @@ library(endpointR)
 file      <- "C:/MHH Bleich/Papers/Schwabe App/Data/test/Validation_data.txt"
 testdata  <- ep_load(file )
 
-a         <- 1 #50
+a         <- 5 #50
 td        <- ep_select(testdata, a) #td        <- ep_select(testdata, "WZ12")
 
 result    <- epR(td        = td,
                  org       = F,
                  wl        = 6,
                  SDwdth    = 2,
-                 mad       = F,
+                 mad       = T,
                  cex       = 1.4,
                  cex.lab   = 1.2,
                  blind     = F,
